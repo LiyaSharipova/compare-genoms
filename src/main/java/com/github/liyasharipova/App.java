@@ -2,9 +2,7 @@ package com.github.liyasharipova;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Hello world!
@@ -18,19 +16,21 @@ public class App {
                     "Должен быть один аргумент, обозначчающий размер последовательности в каждом геноме");
         }
         int k = Integer.parseInt(args[0]);
+//
+//        GenomsList genomsList = new GenomsList();
+//        try (Scanner scanner = new Scanner(new File("Genome_1.txt"))) {
+//            String genom = null;
+//            if (scanner.hasNext()) {
+//                genom = scanner.nextLine();
+//            }
+//            List<String> genomParts = extractGenomPartsDividedByFrom(k, genom);
+//            genomsList.getAllGenoms().add(genomParts);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(genomsList);
 
-        GenomsList genomsList = new GenomsList();
-        try (Scanner scanner = new Scanner(new File("Genome_1.txt"))) {
-            String genom = null;
-            if (scanner.hasNext()) {
-                genom = scanner.nextLine();
-            }
-            List<String> genomParts = extractGenomPartsDividedByFrom(k, genom);
-            genomsList.getAllGenoms().add(genomParts);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        System.out.println(genomsList);
+        Set<String> genomParts = new HashSet<>();
     }
 
     private static List<String> extractGenomPartsDividedByFrom(int k, String genom) {
