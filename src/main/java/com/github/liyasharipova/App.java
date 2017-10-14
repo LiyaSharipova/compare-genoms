@@ -31,15 +31,20 @@ public class App {
             throw new IllegalArgumentException(
                     "Должен быть один аргумент, обозначающий размер последовательности в каждом геноме");
         }
+        // Задаем размер каждой части генома
         int k = Integer.parseInt(args[0]);
 
         String fileName1 = "Genome_1.txt";
         String fileName2 = "Genome_2.txt";
 
+        // Извлекаются уникальные части генома из первого файла и из второго
         Set<String> genomParts1 = extractGenomPartsSet(k, fileName1);
         Set<String> genomParts2 = extractGenomPartsSet(k, fileName2);
+
+        // Добавление частей геномов в БД
         addGenomToDB(genomParts1, 1);
         addGenomToDB(genomParts2, 2);
+        // Вычисление Jaccard Similarity
         System.out.println("JaccardSimilarity = " + getJaccardSimilarity(genomParts1, genomParts2));
     }
 
