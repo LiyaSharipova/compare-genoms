@@ -67,9 +67,9 @@ public class App {
         return genomParts;
     }
 
-    private static double getJaccardSimilarity(Set<String> genomParts1, Set<String> genomParts2) {
-
-    }
+//    private static double getJaccardSimilarity(Set<String> genomParts1, Set<String> genomParts2) {
+//
+//    }
 
     private static void addGenomToDB(Set<String> genomParts, int id) throws SQLException {
         for (String part :
