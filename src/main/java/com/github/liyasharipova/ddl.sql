@@ -1,0 +1,11 @@
+CREATE TABLE genom(
+  id SERIAL PRIMARY KEY,
+  path VARCHAR
+);
+
+CREATE TABLE parts (
+  id SERIAL PRIMARY KEY,
+  genom_id INTEGER REFERENCES genom(id),
+  value VARCHAR NOT NULL
+);
+
