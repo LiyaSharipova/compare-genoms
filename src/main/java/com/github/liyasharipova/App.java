@@ -40,6 +40,7 @@ public class App {
         Set<String> genomParts2 = extractGenomPartsSet(k, fileName2);
         addGenomToDB(genomParts1, 1);
         addGenomToDB(genomParts2, 2);
+        System.out.println("JaccardSimilarity = " + getJaccardSimilarity(genomParts1, genomParts2));
     }
 
     private static Set<String> extractGenomPartsSet(int k, String fileName)
@@ -67,9 +68,17 @@ public class App {
         return genomParts;
     }
 
-//    private static double getJaccardSimilarity(Set<String> genomParts1, Set<String> genomParts2) {
-//
-//    }
+    private static double getJaccardSimilarity(Set<String> genomParts1, Set<String> genomParts2) throws SQLException {
+        PreparedStatement p = conn.prepareStatement("SELECT count(value)::REAL FROM parts AS p " +
+                "WHERE (p.genom_id = 1)  INTERSECT " +
+                "SELECT count(value)::REAL FROM parts AS p " +
+                "WHERE (p.genom_id = 2) /" +
+                "(SELECT count(VALUE)::REAL FROM parts AS p " +
+                "WHERE (p.genom_id = 1) UNION " +
+                "SELECT count(value)::REAL FROM parts AS p " +
+                "WHERE (p.genom_id = 2)) ");
+        return p.executeUpdate();
+    }
 
     private static void addGenomToDB(Set<String> genomParts, int id) throws SQLException {
         for (String part :
